@@ -45,6 +45,7 @@ Or compile with your preferred LaTeX editor (Overleaf, TeXShop, VS Code + LaTeX 
 ## History
 
 - 2026: Updated for PR07284. Added support for Thesis/Thematic Paper/Independent Study plans with Traditional and Publication-based formats. (Thanapon Noraset)
+- 2024: Formatting fixes — abstract spacing, TOC indentation, bibliography label, biography layout. (Krittanat Sutassananon)
 - 2023: hyperref support. (Phaphontee Yamchote)
 - 2021: Updated format per FGS instructions. (Thanapon Noraset)
 - 2017: Initial version. (Angkana Huang)
