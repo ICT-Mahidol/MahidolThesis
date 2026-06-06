@@ -17,8 +17,9 @@
 ## Output PDFs (compile locally; do not track)
 *.pdf
 
-## Keep the regulation document
+## Keep the regulation document and example outputs
 !PR07284.pdf
+!output/*.pdf
 
 ## OS files
 .DS_Store

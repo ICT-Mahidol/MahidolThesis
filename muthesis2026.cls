@@ -124,7 +124,7 @@
 \def\thai#1{} % Thai not support for now
 \def\spsizenormal{18} % for 11pt
 %\def\spsizenormal{21.6} % for 12pt
-\def\tfontname{dbtt}
+\def\tfontname{cmr10}
 \def\tfontsize{\spsizenormal pt}
 \def\huispace{ }
 \def\settfont{\font\utfont = \tfontname\huispace  at \tfontsize}
