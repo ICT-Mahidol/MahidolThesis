@@ -12,6 +12,7 @@
 % author  :  Angkana Huang (2017)
 % author  :  Thanapon Noraset (2021)
 % author  :  Phaphontee Yamchote (2023)
+% author  :  Krittanat Sutassananon (2024)
 % author  :  Thanapon Noraset with Claude Opus 4.6 (2026)
 %
 % 2026 changes (PR07284):
