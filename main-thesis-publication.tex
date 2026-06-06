@@ -1,0 +1,90 @@
+% Main file for Thesis plan, Publication-based Format.
+\documentclass{muthesis2026}
+\thesisplan
+\usepackage[numbers]{natbib}
+\setcounter{secnumdepth}{4}
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{latexsym}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{url}
+\usepackage{textcomp}
+\usepackage{caption,setspace}
+\captionsetup{font={stretch=1.5}}
+\usepackage[flushleft]{threeparttable}
+
+\makeatletter
+\renewcommand{\@dotsep}{10000}
+\setlength{\@fptop}{0pt}
+\setlength{\@fpbot}{0pt plus 1fil}
+\makeatother
+
+\title{TITLE OF THESIS}
+\author{STUDENT FULL NAME}
+\input{preamble}
+
+\begin{document}
+
+\maketitle
+
+\linespacing{1.5}
+\acknowledgements{Write acknowledgements here in formal written language. Length must not exceed one page.}
+
+\abstract{%
+\linespacing{1.2}
+Write the abstract here. Keep within two pages.
+}
+{
+\linespacing{1.2}
+Write the implication of the thesis here.
+}
+
+\tableofcontents
+\listoftables
+\listoffigures
+
+\chapter{Summary}
+% This chapter provides an overview synthesis by integrating the content of all
+% publications into a coherent and unified narrative. It should include:
+%   - Background and significance of the study
+%   - Research objectives
+%   - Scope of the study
+%   - How the publications relate to each other and to the overall research goals
+
+Write the summary here \cite{mount2004bioinformatics}.
+
+\chapter{Publications}
+% Present at least 1 published or formally accepted publication.
+% Each publication should be clearly titled as a section heading.
+% Include the full published version with permission from the publisher.
+% Page numbers must be re-numbered consecutively to match this document.
+
+\section{Title of First Publication}
+% Paste or include the full text of the published paper here.
+% You may use \includepdf from the pdfpages package if inserting the
+% published PDF directly, or reformat the content in LaTeX.
+
+% If more than one publication, add additional sections:
+%\section{Title of Second Publication}
+
+% Include this chapter ONLY if the publications above do not fully address
+% all research objectives. Otherwise, omit it entirely.
+%\chapter{Additional Context}
+% Present supplementary information, data, or analysis on aspects not
+% covered by the publications to ensure all objectives are comprehensively addressed.
+
+\bibliographystyle{unsrtnat}
+% References must compile all citations from the Summary, Publications, and
+% Additional Context chapters into a single consolidated list.
+\bibliography{references}
+
+\appendix
+\chapter{Publisher Permission Evidence}
+% PR07284 requires written proof of publication permission in the appendix.
+% Include publisher copyright permission letters or license agreements here.
+% This is mandatory for Publication-based Format.
+
+\biography
+
+\end{document}

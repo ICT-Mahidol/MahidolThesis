@@ -1,0 +1,65 @@
+% Main file for Independent Study plan, Traditional Format.
+% PR07284 allows flexible chapter structure at advisor discretion.
+\documentclass{muthesis2026}
+\independentstudyplan
+\usepackage[numbers]{natbib}
+\setcounter{secnumdepth}{4}
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{latexsym}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{url}
+\usepackage{textcomp}
+\usepackage{caption,setspace}
+\captionsetup{font={stretch=1.5}}
+\usepackage[flushleft]{threeparttable}
+
+\makeatletter
+\renewcommand{\@dotsep}{10000}
+\setlength{\@fptop}{0pt}
+\setlength{\@fpbot}{0pt plus 1fil}
+\makeatother
+
+\title{TITLE OF INDEPENDENT STUDY}
+\author{STUDENT FULL NAME}
+\input{preamble}
+
+\begin{document}
+
+\maketitle
+
+\linespacing{1.5}
+\acknowledgements{Write acknowledgements here in formal written language. Length must not exceed one page.}
+
+\abstract{%
+\linespacing{1.2}
+Write the abstract here. Keep within two pages.
+}
+{
+\linespacing{1.2}
+Write the implication of the independent study here.
+}
+
+\tableofcontents
+\listoftables
+\listoffigures
+
+% The chapter structure below is a suggestion. Adjust as appropriate
+% to the discipline and nature of the research, per advisor discretion.
+
+\chapter{Introduction}
+Describe background, significance, objectives, and scope \cite{mount2004bioinformatics}.
+
+\chapter{Main Content}
+Organize as appropriate: literature, methods, analysis, results, discussion.
+
+\chapter{Conclusion and Recommendations}
+Summarize key findings, limitations, and future work.
+
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+
+\biography
+
+\end{document}
