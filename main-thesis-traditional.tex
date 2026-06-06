@@ -1,0 +1,79 @@
+% Main file for Thesis plan, Traditional Format.
+% PR07284 requires 6 mandatory chapters for Thesis Traditional Format.
+\documentclass{muthesis2026}
+\thesisplan
+\usepackage[numbers]{natbib}
+\setcounter{secnumdepth}{4}
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{latexsym}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{url}
+\usepackage{textcomp}
+\usepackage{caption,setspace}
+\captionsetup{font={stretch=1.5}}
+\usepackage[flushleft]{threeparttable}
+
+\makeatletter
+\renewcommand{\@dotsep}{10000}
+\setlength{\@fptop}{0pt}
+\setlength{\@fpbot}{0pt plus 1fil}
+\makeatother
+
+\title{TITLE OF THESIS}
+\author{STUDENT FULL NAME}
+\input{preamble}
+
+\begin{document}
+
+\maketitle
+
+\linespacing{1.5}
+\acknowledgements{Write acknowledgements here in formal written language. Length must not exceed one page.}
+
+\abstract{%
+\linespacing{1.2}
+Write the abstract here. Keep within two pages.
+}
+{
+\linespacing{1.2}
+Write the implication of the thesis here.
+}
+
+\tableofcontents
+\listoftables
+\listoffigures
+
+\chapter{Introduction}
+\section{Background and Significance}
+\section{Research Objectives}
+\section{Scope of the Study}
+\section{Conceptual Framework}
+\section{Hypotheses}
+\section{Brief Research Methodology}
+\section{Assumptions}
+\section{Definitions of Terms}
+\section{Research Contribution}
+
+\chapter{Literature Review}
+Review concepts, theories, and related studies \cite{mount2004bioinformatics}.
+
+\chapter{Research Methodology}
+Describe research procedures: population and sample, instruments, validation, data collection, and analysis methods.
+
+\chapter{Results}
+Present findings in accordance with the research objectives.
+
+\chapter{Discussion}
+Discuss findings in relation to concepts, theories, and related studies from Chapter II.
+
+\chapter{Conclusion and Recommendations}
+Summarize key findings, limitations, recommendations, and suggestions for future research.
+
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+
+\biography
+
+\end{document}

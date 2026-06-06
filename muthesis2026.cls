@@ -1,4 +1,4 @@
-% muthesis09.cls
+% muthesis2026.cls
 %
 % author : Ekasit Kijsipongse, Faculty of ICT, Mahidol University
 % based on the original class file version 2006/12/20 v0.48 from Allen.
@@ -12,9 +12,15 @@
 % author  :  Angkana Huang (2017)
 % author  :  Thanapon Noraset (2021)
 % author  :  Phaphontee Yamchote (2023)
+% author  :  Thanapon Noraset with Claude Opus 4.6 (2026)
+%
+% 2026 changes (PR07284):
+% - Renamed class from muthesis2021 to muthesis2026.
+% - Added \thesisplan, \thematicplan, \independentstudyplan commands
+%   to configure document type wording throughout.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{muthesis2021}[2021/10/14 v0.142 Mahidol University thesis class]
+\ProvidesClass{muthesis2026}[2026/06/06 v0.200 Mahidol University thesis class]
 \LoadClass[12pt,a4paper]{report}
 
 \RequirePackage{times}
@@ -132,6 +138,40 @@
 \newcommand{\draft}{\setboolean{@draftmode}{true}}
 \newboolean{@notitlepage}\setboolean{@notitlepage}{false}
 \newcommand{\notitlepage}{\setboolean{@notitlepage}{true}}
+
+% ============================================================
+% Document type selection (PR07284)
+% ============================================================
+
+\def\@submittedstatement{A THESIS SUBMITTED IN PARTIAL FULFILLMENT}
+\def\@documentname{Thesis}
+\def\@abstractdocumentname{Thesis}
+\def\@advisorycommitteename{THESIS ADVISORY COMMITTEE}
+\def\@implicationheading{IMPLICATION OF THE THESIS}
+
+\newcommand{\thesisplan}{
+	\def\@submittedstatement{A THESIS SUBMITTED IN PARTIAL FULFILLMENT}
+	\def\@documentname{Thesis}
+	\def\@abstractdocumentname{Thesis}
+	\def\@advisorycommitteename{THESIS ADVISORY COMMITTEE}
+	\def\@implicationheading{IMPLICATION OF THE THESIS}
+}
+\newcommand{\thematicplan}{
+	\def\@submittedstatement{A THEMATIC PAPER SUBMITTED \\ IN PARTIAL FULFILLMENT}
+	\def\@documentname{Thematic Paper}
+	\def\@abstractdocumentname{Thematic Paper}
+	\def\@advisorycommitteename{THEMATIC PAPER ADVISORY COMMITTEE}
+	\def\@implicationheading{IMPLICATION OF THE THEMATIC PAPER}
+}
+\newcommand{\independentstudyplan}{
+	\def\@submittedstatement{AN INDEPENDENT STUDY SUBMITTED \\ IN PARTIAL FULFILLMENT}
+	\def\@documentname{Independent Study}
+	\def\@abstractdocumentname{Independent Study}
+	\def\@advisorycommitteename{INDEPENDENT STUDY ADVISORY COMMITTEE}
+	\def\@implicationheading{IMPLICATION OF THE INDEPENDENT STUDY}
+}
+
+% ============================================================
 
 % information for front page
 
@@ -333,11 +373,7 @@
 \newcommand{\@sbx}[1]{\parbox[t]{70mm}{\raggedright\@sigdots\\#1}}
 \newlength{\@halftextwidth}
 \@halftextwidth=0.53\textwidth
-%\def\@thesisentitled{\vspace*{-15mm}Thesis \\ entitled \\ \vskip 1em
-%	\large \bfseries \@TITLE \\
-%	\normalsize\rm
-%}
-\def\@thesisentitled{Thesis \\ entitled \\ %\vskip 0.5em
+\def\@thesisentitled{\@documentname \\ entitled \\ %\vskip 0.5em
 	\large \bfseries \@TITLE \\
 	\normalsize\rm
 }
@@ -398,8 +434,8 @@
         \MakeUppercase\@author
       	\end{tabular}\par}
     	\vfill
-	{\large % US spelling is FULFILLMENT
-    	A THESIS SUBMITTED IN PARTIAL FULFILLMENT \\
+	{\large
+    	\@submittedstatement \\
 	OF THE REQUIREMENTS FOR THE DEGREE OF \\
 	\MakeUppercase\@fulldegree \mbox{ }(\MakeUppercase\@subject) \\
 	FACULTY OF GRADUATE STUDIES \\
@@ -496,10 +532,8 @@
 	\markright{
 	\hspace*{-0.03\textwidth}
 	\protect\raisebox{-10mm}{
-%	\fbox{\protect\rule[-\textheight]{0pt}{0pt}\hspace*{1.04\textwidth}}}
-%	\hspace*{-1.03\textwidth}\small\@facgradstud\hfil Thesis / \thepage
 	\fbox{\protect\rule[-0.99\textheight]{0pt}{0pt}\hspace*{1.0\textwidth}}}
-	\hspace*{-1.015\textwidth}\footnotesize\@facgradstud\hfil Thesis / \thepage
+	\hspace*{-1.015\textwidth}\footnotesize\@facgradstud\hfil \@abstractdocumentname / \thepage
 	}
 }
 
@@ -510,9 +544,7 @@
 	\newpage
 	\addcontentsline{toc}{chapter}{ABSTRACT}
 	\@abstractbox
-%	\linespacing{1.0}
       	%\null\vfil
-	%\parindent = 4 ex								% if set, it has global effect to the rest content.
 	    \noindent\sloppy
         \@TITLE \\ \vspace{-1mm} \\%
   	\MakeUppercase\@candidate~~\@candidatenumber \\ \vspace{-1mm} \\%
@@ -520,31 +552,23 @@
 	\ifthenelse{\equal{\@degree}{M.Sc.}}{
 	\ifthenelse{\equal{\@major}{}}
 	{}{MAJOR IN \MakeUppercase\@major}}{} \\ \vspace{-1em}%
-%        : \= MAJOR :
-%	\ifthenelse{\equal{\@major}{}}
-%	{\MakeUppercase\@subject\ }{\MakeUppercase\@major\ };
-%	\ifthenelse{\boolean{@longsubject}}{ \\ \> }{}
-        %\sloppy
         \begin{flushleft}
-        THESIS ADVISORY COMMITTEE:
+        \@advisorycommitteename:
 	\MakeUppercase\@majoradvisor, \@majoradvisorletters
-        %(\MakeUppercase\@majoradvisorsubject)
 	\ifthenelse{\equal{\@coadvisor}{}}{ }{,
 	\MakeUppercase\@coadvisor, \@coadvisorletters
-        }%(\MakeUppercase\@coadvisorsubject)} \\ %
+        }%
 	\ifthenelse{\equal{\@coadvisorII}{}}{ }{,
 	\MakeUppercase\@coadvisorII, \@coadvisorIIletters\
-        } \\ %(\MakeUppercase\@coadvisorIIsubject)} \\
+        } \\
        \end{flushleft}
-  \vspace{-3ex}													% Reduce too much line spacing before ABSTRACT
+  \vspace{-3ex}
 	\begin{center}ABSTRACT\end{center}
 	\vspace{-0.8em}
-%	\@beginparpenalty\@lowpenalty
-%        \@endparpenalty\@M
 	\par #1
         \newpage
         \@abstractbox
-	\begin{center}IMPLICATION OF THE THESIS\end{center}
+	\begin{center}\@implicationheading\end{center}
 	\par #2
 	\vspace{-0.8em}
 
@@ -555,59 +579,12 @@
 	 \> \MakeTextUppercase\@keywordsII\\ }
 	\ifthenelse{\equal{\@keywordsIII}{}}{}{
 	 \> \MakeTextUppercase\@keywordsIII\\ } \\ \vspace{-5mm}%
-	\pageref{biography}\ pages %pp\@. ISBN~\@isbn                % pp. and ISBN in abstract page
+	\pageref{biography}\ pages
       	\end{tabbing}\fussy
   \linespacing{1.5}
 \fi
 }
-%{\par\vfil\null\endtitlepage}
 
-
-
-%\newcommand{\thaiabstract}[1]{\if@draftmode\else
-%	%\titlepage
-%	%\linespacing{1.3}
-%	\newpage
-%	\addcontentsline{toc}{chapter}{ABSTRACT (THAI)}
-%	\@abstractbox
-%      	%\null\vfil
-%	%\parindent = 8 ex				% if set, it has global effect to the rest content.
-%        \noindent\sloppy
-%        \@thaititle\ (\@TITLE). \\ \\
-%	\ifthenelse{\equal{\@thaicandidate}{}}
-%                   {\MakeTextUppercase\@candidate}
-%                   {\@thaicandidate}~~\@candidatenumber\\ \\
-%	\ifthenelse{\equal{\@degree}{Ph.D.}}{{\Th  ปร.ด}}{{\Th วท.ม.}} %
-%	(\@thaisubject)
-%        \ifthenelse{\equal{\@degree}{M.Sc.}}{%
-%	\ifthenelse{\equal{\@thaimajor}{}}%
-%	{}{{\Th สาขาวิชาเอก}\@thaimajor\ }}{} \\
-%	\par\fussy\noindent
-%        \sloppy
-%	{\Th คณะกรรมการควบคุมวิทยานิพนธ์}
-%	: \ifthenelse{\equal{\@thaimajoradvisor}{}}
-%        {\MakeUppercase\@majoradvisor}{\@thaimajoradvisor},
-%        \@majoradvisorletters\ (\MakeUppercase\@majoradvisorsubject),
-%	\ifthenelse{\equal{\@thaicoadvisor}{}}{\MakeUppercase\@coadvisor}
-%	{\@thaicoadvisor}, \@coadvisorletters\
-%        (\MakeUppercase\@coadvisorsubject)%
-%	\ifthenelse{\equal{\@coadvisorII}{}}{ }{,
-%        \ifthenelse{\equal{\@thaicoadvisorII}{}}{%
-%	\MakeUppercase\@coadvisorII}{\@thaicoadvisorII}, \@coadvisorIIletters\
-%        (\MakeUppercase\@coadvisorIIsubject)} \\
-%	%\tolerance=1000
-%	%\spaceskip 0.333em plus 1em minus 0.222em
-%	%\@beginparpenalty\@lowpenalty
-%        %\@endparpenalty\@M
-%	\begin{center}{\Th บทคัดย่อ}\end{center}
-%	\par
-%	\linespacing{1.5}
-%	%\sloppy #1 \par
-%  {\bf THAI NOT SUPPORTED IN THIS LATEX CLASS.  USE MS WORD TO CREATE THAI ABSTRACT. \\}
-%        \fussy\mbox{}\newline
-%	\noindent\pageref{biography}~{\Th หน้า} ISBN~\@isbn
-%\fi
-%} % the \par is necessary to get last paragraph to have good spacing
 
 \renewcommand\chapter{\if@openright\cleardoublepage\else\clearpage\fi
 %	\thispagestyle{myheadings}
@@ -634,8 +611,6 @@
     \endgroup
   \fi}
 
-% \@chapter ตัวปัญหาที่ทำให้ใช้ hyperref package ไม่ได้
-
 \def\@chapter[#1]#2{%
 	\ifnum \c@secnumdepth >\m@ne
 	\refstepcounter{chapter}%
@@ -655,8 +630,6 @@
 	\addcontentsline{toc}{chapter}{#1}%
 	\fi
 	\chaptermark{\texorpdfstring{#1}{Title for PDF bookmarks}}%
-                    %\addtocontents{lof}{\protect\addvspace{10\p@}}%
-                    %\addtocontents{lot}{\protect\addvspace{10\p@}}%
                     \if@twocolumn
                       \@topnewpage[\@makechapterhead{#2}]%
                     \else
@@ -674,15 +647,12 @@
 	{\parindent \z@ \raggedright \normalfont
 	\ifnum \c@secnumdepth >\m@ne
 	\begin{center}
-%        \large\bfseries \MakeTextUppercase\@chapapp\space \@arabic\c@chapter
         \large\bfseries
-        \linespacing{1.6}  % Set 1.5 space but don't know why using 1.6
-%        \MakeTextUppercase\@chapapp\space \@Roman\thechapter \\   % Chapter number, ekasit
-        \MakeTextUppercase\@chapapp\space \ifthenelse{\equal{\@appname}{}}{\@Roman}{}\thechapter \\   % Chapter number, ekasit
-	      \MakeTextUppercase{#1}\par\nobreak    % chapter title, ekasit
+        \linespacing{1.6}
+        \MakeTextUppercase\@chapapp\space \ifthenelse{\equal{\@appname}{}}{\@Roman}{}\thechapter \\
+	      \MakeTextUppercase{#1}\par\nobreak
 	\end{center}
-	%\vskip 20\p@
-	\vskip 1.3cm     % add up space to get about 2 cm after chapter title, ekasit
+	\vskip 1.3cm
 }}
 
 \def\@schapter#1{
@@ -692,9 +662,8 @@
 	\@makeschapterhead{#1}%
 	\@afterheading
 	\fi
-	%\@doublespaced
 }
-\def\@makeschapterhead#1{     % formatting unnumbered chapter \chapter*
+\def\@makeschapterhead#1{
 	\vspace*{5\p@}
 	{\parindent \z@ \raggedright
 	\normalfont
@@ -702,32 +671,26 @@
 	\begin{center}
 	\large \bfseries\MakeTextUppercase{#1}\par\nobreak
 	\end{center}
-%	\vskip 20\p@ % originally 40
-	\vskip 1.3cm     % add up space to get about 2 cm after chapter title, ekasit
+	\vskip 1.3cm
 }}
 
 \renewcommand\section{%
 	\@startsection {section}{1}{\z@}%
-%	{-4.7ex \@plus -1ex \@minus -.2ex}% space above heading
-    {-8.5ex \@plus -1ex \@minus -.2ex}% space above heading
-	%{0.1ex \@plus.1ex}% space below heading
-    {1ex \@plus4.7ex}% space below heading
+    {-8.5ex \@plus -1ex \@minus -.2ex}%
+    {1ex \@plus4.7ex}%
 	{\normalfont\large\bfseries}%
 }
 % Subsection headings
 \renewcommand\subsection{%
 	\@startsection{subsection}{2}{\parindent}%
-	%{-4.7ex\@plus -1ex \@minus -.2ex}%
     {-4.7ex\@plus -.2ex \@minus -.2ex}%
 	{0.1ex \@plus .1ex}%
 	{\normalfont\normalsize\bfseries}%
 }
 \renewcommand\subsubsection{%
     \@startsection{subsubsection}{3}{4cm}%
-	%{-4.7ex\@plus -1ex \@minus -.2ex}%
     {-1.3ex\@plus -.1ex \@minus -.1ex}%
 	{0.1ex \@plus .1ex}%
-    %{\normalfont\normalsize\bfseries}%
     {\normalfont\normalsize}%
 }
 
@@ -762,8 +725,6 @@
     \let\@mkboth\@gobbletwo
     \@topskipsave\topskip
     \topskip 35mm
-%    \def\@oddhead{\raisebox{-0.55in}{\large \bfseries \@althead}%
-%                  \footnotesize\hfil\thepage}
     \def\@oddhead{\parbox[t]{\textwidth}{\raisebox{-13.5mm}{\large \bfseries \@althead}%
                         \footnotesize\hfill\thepage \\
                         \normalsize \bfseries \mbox{ } \hfill  \raisebox{-24mm}{Page}}}
@@ -826,23 +787,12 @@
 		\pagestyle{figurecontinued}
 	       	\thispagestyle{myheadings}
 	       	\markright{\footnotesize\hfil\thepage}
-	%	%\linespacing{1.3}
 		\addcontentsline{toc}{chapter}{\listfigurename}
 		\@starttoc{lof} % must go after addcontentsline
 		\if@restonecol\twocolumn\fi
 	\fi
 	}
 
-%\newcommand{\abbrlist}{%
-%	\singlespacing
-%	\chapter*{\uppercase{LIST OF ABBREVIATIONS}}
-%}
-%
-%\newcommand{\symlist}{%
-%	\singlespacing
-%	% \prelim@contents{List of Symbols}
-%	\chapter*{LIST OF SYMBOLS}
-%}
 \renewcommand{\listtablename }{LIST OF TABLES}
 \renewcommand\listoftables{
 \if@draftmode\else
@@ -856,7 +806,6 @@
 	\pagestyle{tablecontinued}
        	\thispagestyle{myheadings}
        	\markright{\footnotesize\hfil\thepage}
-	%\linespacing{1.3}
 	\addcontentsline{toc}{chapter}{\listtablename}
 	\@starttoc{lot}%
 	\if@restonecol\twocolumn\fi
@@ -893,7 +842,6 @@
 	\markright{\bibname}
 	\renewcommand{\@appname}{}
 	\ifthenelse{\boolean{@natbibmode}}{%
-		%\linespacing{1.3}
 		\list{\@biblabel{\arabic{NAT@ctr}}}{\@bibsetup{#1}%
 			\setcounter{NAT@ctr}{0}}%
 		\ifNAT@openbib
@@ -906,7 +854,6 @@
 		\let\citeN\cite \let\shortcite\cite
 		\let\citeasnoun\cite}{\list{\@biblabel{\@arabic\c@enumiv}}%
 		{\settowidth\labelwidth{\@biblabel{#1}}%
-			%\leftmargin\labelwidth%
 			\leftmargin 2cm
 			\addtolength{\itemindent}{\labelwidth}
 			\addtolength{\itemindent}{-2cm}
@@ -943,7 +890,6 @@
 	{\bf INSTITUTIONS ATTENDED} \>\@firstdegreeinstitution,
 	\@firstdegreeyears \\
 	\>\hspace{1cm}\=\@firstdegree\
-% the extra `(' seems to be necessary -- some bug in LaTeX???
         \ifthenelse{\boolean{@longfirstdegree}}{ \\ \>\> (}%
 	(\@firstdegreemajor) \\
 	\ifthenelse{\equal{\@preinstitution}{}}{}{\>\@preinstitution \\
@@ -989,7 +935,7 @@
 	\ifthenelse{\equal{\@email}{}}{}{{\bf E-MAIL} \>\@email \\ }%
 	\end{tabbing}
 \fi
-} % the `%' after each line are necessary - otherwise get extra spaces
+}
 
 \pagestyle{headings}
 \AtBeginDocument{\pagenumbering{roman}}
@@ -1008,7 +954,3 @@
 \addtocontents{lof}{ \protect \contentsline{chapter}{Figure}{\textbf{Page}}{}}
 \renewcommand*\l@figure{\@dottedtocline{1}{0em}{2.3em}}  % define indent = 0
 \renewcommand*\l@table{\@dottedtocline{1}{0em}{2.3em}}  % define indent = 0
-%\renewcommand*\l@figure{\@dottedtocline{1}{0em}{2.3em}}  % define indent = 0
-%\renewcommand*\l@table{\@dottedtocline{1}{0em}{2.3em}}  % define indent = 0
-%\renewcommand*\l@chapter{\@dottedtocline{0}{0em}{2.3em}}
-
