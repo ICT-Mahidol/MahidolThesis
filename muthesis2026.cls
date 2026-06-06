@@ -562,7 +562,7 @@
 	\MakeUppercase\@coadvisorII, \@coadvisorIIletters\
         } \\
        \end{flushleft}
-  \vspace{-3ex}
+  \vspace{-1ex}
 	\begin{center}ABSTRACT\end{center}
 	\vspace{-0.8em}
 	\par #1
@@ -570,9 +570,8 @@
         \@abstractbox
 	\begin{center}\@implicationheading\end{center}
 	\par #2
-	\vspace{-0.8em}
 
-	\vspace{0.5em}
+	\vspace{1em}
         \begin{tabbing}
 	KEY WORDS~: \= \MakeTextUppercase\@keywords \\
 	\ifthenelse{\equal{\@keywordsII}{}}{}{
@@ -610,6 +609,9 @@
       #1\nobreak\hfil \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
     \endgroup
   \fi}
+
+\renewcommand*\l@section{\@dottedtocline{1}{2cm}{2em}}
+\renewcommand*\l@subsection{\@dottedtocline{1}{4cm}{2.5em}}
 
 \def\@chapter[#1]#2{%
 	\ifnum \c@secnumdepth >\m@ne
@@ -836,6 +838,8 @@
   \gdef\@chapapp{\appendixname}%
   \gdef\thechapter{\@Alph\c@chapter}}
 
+\renewcommand{\@biblabel}[1]{#1}
+
 \renewenvironment{thebibliography}[1]{
 	\chapter*{\bibname}
 	\addcontentsline{toc}{chapter}{\MakeUppercase{\bibname}}
@@ -889,7 +893,7 @@
 	{\bf PLACE OF BIRTH} \>\@placeofbirth \\
 	{\bf INSTITUTIONS ATTENDED} \>\@firstdegreeinstitution,
 	\@firstdegreeyears \\
-	\>\hspace{1cm}\=\@firstdegree\
+	\>\=\@firstdegree\
         \ifthenelse{\boolean{@longfirstdegree}}{ \\ \>\> (}%
 	(\@firstdegreemajor) \\
 	\ifthenelse{\equal{\@preinstitution}{}}{}{\>\@preinstitution \\
