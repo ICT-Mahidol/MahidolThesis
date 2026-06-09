@@ -230,6 +230,7 @@
 \newcommand{\submissiondate}[1]{\def\@submissiondate{#1}}
 \newcommand{\chair}[1]{\def\@chair{#1}}
 \newcommand{\chairqual}[1]{\def\@chairqual{#1}}
+\newcommand{\chairsubject}[1]{\def\@chairsubject{#1}}
 \newcommand{\memberI}[1]{\def\@memberI{#1}}
 \newcommand{\memberIqual}[1]{\def\@memberIqual{#1}}
 \newcommand{\memberII}[1]{\def\@memberII{#1}}
@@ -242,6 +243,7 @@
 \newcommand{\memberVqual}[1]{\def\@memberVqual{#1}}
 \newcommand{\facultydean}[1]{\def\@facultydean{#1}}
 \newcommand{\FDqual}[1]{\def\@FDqual{#1}}
+\newcommand{\FDsubject}[1]{\def\@FDsubject{#1}}
 \newcommand{\FDstatus}[1]{\def\@FDstatus{#1}}
 
 % information for page iv (ABSTRACT)
@@ -329,6 +331,7 @@
 \GSDqual{Ph.D.}
 \GSDstatus{}
 \chair{}
+\chairsubject{}
 \memberI{}
 \memberIqual{}
 \memberII{}
@@ -341,6 +344,7 @@
 \memberVqual{}
 \facultydean{Prof.~Amaret Bhumiratana}
 \FDqual{Ph.D.}
+\FDsubject{}
 \FDstatus{}
 \major{}
 \keywordsII{}
@@ -506,7 +510,7 @@
 	\@sbx{\@graduatestudiesdean\\
           \ifthenelse{\equal{\@GSDstatus}{}}{}{\@GSDstatus\ } Dean\\
 	Faculty of Graduate Studies \\Mahidol University}
-	\>\@sbx{\@programchair, \\\@programchairqual \\Program Director \\
+	\>\@sbx{\@programchair, \\\@programchairqual~(\@subject) \\Program Director \\
 	  \@fulldegree\ Programme \\in \@subject \\ Faculty of \@faculty \\Mahidol University}
 	\end{tabbing}
 	\newpage  % THESIS EXAM COMMITTEE
@@ -525,19 +529,21 @@
 	\hspace{\@halftextwidth}\=\kill
 	\@sbx{\@candidatetitle \@candidate \\
 	Candidate}
-	\>\@sbx{\@chair,\\ \@chairqual} \\ \\ \\
-	\ifthenelse{\equal{\@memberIV}{}}{}%
-                   {\@sbx{\@memberIV,\\\@memberIVqual\\ Member}}
-	\>\@sbx{\ifthenelse{\equal{\@memberI}{}}
-	{\@majoradvisortitle \@majoradvisor,\\
-          \@majoradvisorletters~(\@majoradvisorsubject)}
-        {\@memberI,\\\@memberIqual} \\ Member} \\ \\ \\
-	\ifthenelse{\equal{\@memberIII}{}}{}%
-                   {\@sbx{\@memberIII,\\\@memberIIIqual\\ Member}}
-	\>\@sbx{\ifthenelse{\equal{\@memberII}{}}
-	{\@coadvisortitle
-	\@coadvisor,\\\@coadvisorletters~(\@coadvisorsubject)}
-        {\@memberII, \\ \@memberIIqual} \\ Member} \\ \\ \\
+	\>\@sbx{\@chair,\\ \@chairqual\ifthenelse{\equal{\@chairsubject}{}}{}{~(\@chairsubject)}} \\ \\ \\
+	\>\@sbx{\@majoradvisortitle \@majoradvisor,\\
+          \@majoradvisorletters~(\@majoradvisorsubject)} \\ \\ \\
+	\ifthenelse{\equal{\@coadvisor}{}}{}{%
+	\>\@sbx{\@coadvisortitle
+	\@coadvisor,\\\@coadvisorletters~(\@coadvisorsubject)} \\ \\ \\
+	}%
+	\ifthenelse{\equal{\@coadvisorII}{}}{}{%
+	\>\@sbx{\@coadvisorIItitle \@coadvisorII,\\
+                \@coadvisorIIletters~(\@coadvisorIIsubject)} \\ \\ \\
+	}%
+	\ifthenelse{\equal{\@coadvisorIII}{}}{}{%
+	\>\@sbx{\@coadvisorIIItitle \@coadvisorIII,\\
+                \@coadvisorIIIletters~(\@coadvisorIIIsubject)} \\ \\ \\
+	}%
 	\end{tabbing}
 	\vfill
 	\begin{tabbing}
@@ -546,7 +552,7 @@
         \ifthenelse{\equal{\@GSDstatus}{}}{}{\@GSDstatus\ }Dean \\
         Faculty of Graduate Studies\\
         Mahidol University}
-        \>\@sbx{\@facultydean,\\ \@FDqual \\
+        \>\@sbx{\@facultydean,\\ \@FDqual\ifthenelse{\equal{\@FDsubject}{}}{}{~(\@FDsubject)} \\
 	\ifthenelse{\equal{\@FDstatus}{}}{}{\@FDstatus\ }Dean \\
 	Faculty of \@faculty \\Mahidol University}
 	\end{tabbing}
