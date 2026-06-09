@@ -131,6 +131,7 @@
 \def\settfont{\font\utfont = \tfontname\huispace  at \tfontsize}
 \settfont % initialize thai font and size
 
+\renewcommand\contentsname{TABLE OF CONTENTS}
 \renewcommand\bibname{References}
 
 % draft mode
@@ -146,30 +147,38 @@
 
 \def\@submittedstatement{A THESIS SUBMITTED IN PARTIAL FULFILLMENT}
 \def\@documentname{Thesis}
+\def\@documentnamelc{Thesis}
 \def\@abstractdocumentname{Thesis}
 \def\@advisorycommitteename{THESIS ADVISORY COMMITTEE}
-\def\@implicationheading{IMPLICATION OF THE THESIS}
+\def\@advisorycommitteesheading{Thesis Advisory Committees}
+\def\@examcommitteesheading{Thesis Examination Committees}
 
 \newcommand{\thesisplan}{
 	\def\@submittedstatement{A THESIS SUBMITTED IN PARTIAL FULFILLMENT}
 	\def\@documentname{Thesis}
+	\def\@documentnamelc{Thesis}
 	\def\@abstractdocumentname{Thesis}
 	\def\@advisorycommitteename{THESIS ADVISORY COMMITTEE}
-	\def\@implicationheading{IMPLICATION OF THE THESIS}
+	\def\@advisorycommitteesheading{Thesis Advisory Committees}
+	\def\@examcommitteesheading{Thesis Examination Committees}
 }
 \newcommand{\thematicplan}{
-	\def\@submittedstatement{A THEMATIC PAPER SUBMITTED \\ IN PARTIAL FULFILLMENT}
+	\def\@submittedstatement{A THEMATIC PAPER SUBMITTED IN PARTIAL FULFILLMENT}
 	\def\@documentname{Thematic Paper}
+	\def\@documentnamelc{Thematic paper}
 	\def\@abstractdocumentname{Thematic Paper}
 	\def\@advisorycommitteename{THEMATIC PAPER ADVISORY COMMITTEE}
-	\def\@implicationheading{IMPLICATION OF THE THEMATIC PAPER}
+	\def\@advisorycommitteesheading{Thematic paper Advisory Committees}
+	\def\@examcommitteesheading{Thematic paper Examination Committees}
 }
 \newcommand{\independentstudyplan}{
-	\def\@submittedstatement{AN INDEPENDENT STUDY SUBMITTED \\ IN PARTIAL FULFILLMENT}
+	\def\@submittedstatement{AN INDEPENDENT STUDY SUBMITTED IN PARTIAL FULFILLMENT}
 	\def\@documentname{Independent Study}
+	\def\@documentnamelc{Independent study}
 	\def\@abstractdocumentname{Independent Study}
 	\def\@advisorycommitteename{INDEPENDENT STUDY ADVISORY COMMITTEE}
-	\def\@implicationheading{IMPLICATION OF THE INDEPENDENT STUDY}
+	\def\@advisorycommitteesheading{Independent study Advisory Committees}
+	\def\@examcommitteesheading{Independent study Examination Committees}
 }
 
 % ============================================================
@@ -293,7 +302,12 @@
 \newcommand{\homeaddressLnII}[1]{\def\@homeaddressLnII{#1}}
 \newcommand{\homeaddressLnIII}[1]{\def\@homeaddressLnIII{#1}}
 \newcommand{\email}[1]{\def\@email{#1}}
-%\newcommand{\}[1]{\def\@{#1}}
+\newcommand{\researchgrants}[1]{\def\@researchgrants{#1}}
+\newcommand{\researchgrantsLnII}[1]{\def\@researchgrantsLnII{#1}}
+\newcommand{\researchgrantsLnIII}[1]{\def\@researchgrantsLnIII{#1}}
+\newcommand{\publications}[1]{\def\@publications{#1}}
+\newcommand{\publicationsLnII}[1]{\def\@publicationsLnII{#1}}
+\newcommand{\publicationsLnIII}[1]{\def\@publicationsLnIII{#1}}
 
 % set defaults for non-essential parameters
 \degree{}
@@ -363,6 +377,12 @@
 \homeaddressLnII{}
 \homeaddressLnIII{}
 \email{}
+\researchgrants{}
+\researchgrantsLnII{}
+\researchgrantsLnIII{}
+\publications{}
+\publicationsLnII{}
+\publicationsLnIII{}
 
 % alternative heading used for CONTENTS (CONT.), etc
 \newcommand{\@althead}{}
@@ -374,7 +394,7 @@
 \newcommand{\@sbx}[1]{\parbox[t]{70mm}{\raggedright\@sigdots\\#1}}
 \newlength{\@halftextwidth}
 \@halftextwidth=0.53\textwidth
-\def\@thesisentitled{\@documentname \\ entitled \\ %\vskip 0.5em
+\def\@thesisentitled{\@documentnamelc \\ entitled \\ %\vskip 0.5em
 	\large \bfseries \@TITLE \\
 	\normalsize\rm
 }
@@ -435,7 +455,7 @@
         \MakeUppercase\@author
       	\end{tabular}\par}
     	\vfill
-	{\large
+	{\normalsize \bfseries
     	\@submittedstatement \\
 	OF THE REQUIREMENTS FOR THE DEGREE OF \\
 	\MakeUppercase\@fulldegree \mbox{ }(\MakeUppercase\@subject) \\
@@ -450,61 +470,78 @@
   	%\vskip 1.5em   % vertical space at the bottom of the first page
 	\newpage  % THESIS ADVISORS
 	\setcounter{page}{1}
-	\thispagestyle{empty}
+	\thispagestyle{myheadings}
+	\markright{\footnotesize\hfil\thepage}
 	\begin{center}
-	\@thesisentitled  \vfill
+	\@thesisentitled  \vskip 1em
+	was submitted to the Faculty of Graduate Studies, Mahidol University \\
+	for the degree of \@fulldegree\ (\@subject) \\
+	on \\
+	\@submissiondate \\ \vskip 2em
+	{\large \bfseries \@advisorycommitteesheading} \\
+	\end{center}
+	\begin{flushright}\bfseries Major Advisor\end{flushright}
 	\begin{tabbing}
-	\hspace{\@halftextwidth}\=\@sbx{\@candidatetitle \@candidate \\
-	Candidate} \\ \\ \\ \ifthenelse{\equal{\@coadvisorIII}{}}{ \\ }{}
-	\ifthenelse{\equal{\@coadvisorII}{}}{ \\ }{}
+	\hspace{\@halftextwidth}\=\kill
+	\@sbx{\@candidatetitle \@candidate \\
+	Candidate}
 	\>\@sbx{\@majoradvisortitle \@majoradvisor, \\
-        \@majoradvisorletters~(\@majoradvisorsubject) \\
-	Major advisor} \\ \\ \\ \ifthenelse{\equal{\@coadvisorIII}{}}{ \\ }{}
-	\ifthenelse{\equal{\@coadvisorII}{}}{ \\ }{}
+        \@majoradvisorletters~(\@majoradvisorsubject)} \\ \\ \\
+	\ifthenelse{\equal{\@coadvisor}{}}{}{%
 	\>\@sbx{\@coadvisortitle \@coadvisor, \\
-        \@coadvisorletters~(\@coadvisorsubject) \\
-	\@coadvisorstatus} \\ \\ \\ \ifthenelse{\equal{\@coadvisorIII}{}}{ \\ }{}
-	\ifthenelse{\equal{\@coadvisorII}{}}{ \\ }{%
+        \@coadvisorletters~(\@coadvisorsubject)} \\ \\ \\
+	}
+	\ifthenelse{\equal{\@coadvisorII}{}}{}{%
 		\>\@sbx{\@coadvisorIItitle \@coadvisorII, \\
-                \@coadvisorIIletters~(\@coadvisorIIsubject) \\
-		Co-advisor} \\ \\ \\ \ifthenelse{\equal{\@coadvisorIII}{}}{ \\ }{}
+                \@coadvisorIIletters~(\@coadvisorIIsubject)} \\ \\ \\
 	}
 	\ifthenelse{\equal{\@coadvisorIII}{}}{}{%
 		\>\@sbx{\@coadvisorIIItitle \@coadvisorIII, \\
-                \@coadvisorIIIletters~(\@coadvisorIIIsubject) \\
-		Co-advisor} \\ \\ \\
+                \@coadvisorIIIletters~(\@coadvisorIIIsubject)} \\ \\ \\
 	}
+	\end{tabbing}
+	\vfill
+	\begin{tabbing}
+	\hspace{\@halftextwidth}\=\kill
 	\@sbx{\@graduatestudiesdean\\
           \ifthenelse{\equal{\@GSDstatus}{}}{}{\@GSDstatus\ } Dean\\
 	Faculty of Graduate Studies \\Mahidol University}
 	\>\@sbx{\@programchair, \\\@programchairqual \\Program Director \\
 	  \@fulldegree\ Programme \\in \@subject \\ Faculty of \@faculty \\Mahidol University}
 	\end{tabbing}
-  	\end{center}
 	\newpage  % THESIS EXAM COMMITTEE
-	\thispagestyle{empty}
+	\thispagestyle{myheadings}
+	\markright{\footnotesize\hfil\thepage}
 	\begin{center}
 	\@thesisentitled \vskip 1em
 	was submitted to the Faculty of Graduate Studies, Mahidol University \\
 	for the degree of \@fulldegree\ (\@subject) \\
 	on \\
-	\@submissiondate \\ \vfill
+	\@submissiondate \\ \vskip 2em
+	{\large \bfseries \@examcommitteesheading} \\
+	\end{center}
+	\begin{flushright}\bfseries Chair\end{flushright}
 	\begin{tabbing}
-	\hspace{\@halftextwidth}\=\@sbx{\@candidatetitle \@candidate \\
-	Candidate} \\ \\ \\ \\
-	\>\@sbx{\@chair,\\ \@chairqual\\ Chair} \\ \\ \\ \\
-	\ifthenelse{\equal{\@memberIV}{}}{}
+	\hspace{\@halftextwidth}\=\kill
+	\@sbx{\@candidatetitle \@candidate \\
+	Candidate}
+	\>\@sbx{\@chair,\\ \@chairqual} \\ \\ \\
+	\ifthenelse{\equal{\@memberIV}{}}{}%
                    {\@sbx{\@memberIV,\\\@memberIVqual\\ Member}}
 	\>\@sbx{\ifthenelse{\equal{\@memberI}{}}
 	{\@majoradvisortitle \@majoradvisor,\\
           \@majoradvisorletters~(\@majoradvisorsubject)}
-        {\@memberI,\\\@memberIqual} \\ Member} \\ \\ \\ \\
+        {\@memberI,\\\@memberIqual} \\ Member} \\ \\ \\
 	\ifthenelse{\equal{\@memberIII}{}}{}%
                    {\@sbx{\@memberIII,\\\@memberIIIqual\\ Member}}
 	\>\@sbx{\ifthenelse{\equal{\@memberII}{}}
 	{\@coadvisortitle
 	\@coadvisor,\\\@coadvisorletters~(\@coadvisorsubject)}
-        {\@memberII, \\ \@memberIIqual} \\ Member} \\ \\ \\ \\
+        {\@memberII, \\ \@memberIIqual} \\ Member} \\ \\ \\
+	\end{tabbing}
+	\vfill
+	\begin{tabbing}
+	\hspace{\@halftextwidth}\=\kill
 	\@sbx{\@graduatestudiesdean\\
         \ifthenelse{\equal{\@GSDstatus}{}}{}{\@GSDstatus\ }Dean \\
         Faculty of Graduate Studies\\
@@ -514,7 +551,6 @@
 	Faculty of \@faculty \\Mahidol University}
 	\end{tabbing}
 \fi
-  	\end{center}
 \fi
 }
 
@@ -531,14 +567,11 @@
 \def\@abstractbox{
 	\thispagestyle{myheadings}
 	\markright{
-	\hspace*{-0.03\textwidth}
-	\protect\raisebox{-10mm}{
-	\fbox{\protect\rule[-0.99\textheight]{0pt}{0pt}\hspace*{1.0\textwidth}}}
-	\hspace*{-1.015\textwidth}\footnotesize\@facgradstud\hfil \@abstractdocumentname / \thepage
+	\footnotesize\@facgradstud\hfil \@abstractdocumentname / \thepage
 	}
 }
 
-\renewcommand{\abstract}[2]{\if@draftmode\if@notitlepage\else
+\renewcommand{\abstract}[1]{\if@draftmode\if@notitlepage\else
  #1 \newpage \fi
 \else
 	%\titlepage
@@ -567,14 +600,10 @@
 	\begin{center}ABSTRACT\end{center}
 	\vspace{-0.8em}
 	\par #1
-        \newpage
-        \@abstractbox
-	\begin{center}\@implicationheading\end{center}
-	\par #2
 
 	\vspace{1em}
         \begin{tabbing}
-	KEY WORDS~: \= \MakeTextUppercase\@keywords \\
+	KEYWORDS: \= \MakeTextUppercase\@keywords \\
 	\ifthenelse{\equal{\@keywordsII}{}}{}{
 	 \> \MakeTextUppercase\@keywordsII\\ }
 	\ifthenelse{\equal{\@keywordsIII}{}}{}{
@@ -620,9 +649,9 @@
 	\typeout{\@chapapp\space\thechapter.}%
 	\ifthenelse{\equal{\@appname}{}}{%
 		\addcontentsline{toc}{chapter}{%
-			\protect\numberline{\MakeTextUppercase{\@chapapp}\ \@Roman\thechapter}%
+			\protect\numberline{\MakeTextUppercase{\@chapapp}\ \thechapter}%
 			\texorpdfstring{\MakeTextUppercase{#1}}{#1}%
-		}% CHAPTER I .....
+		}% CHAPTER 1 .....
 	}{%
 		\addcontentsline{toc}{chapter}{%
 			\hspace{1.5em} \protect\numberline{\MakeTextUppercase{\@chapapp}\ \thechapter}%
@@ -652,7 +681,7 @@
 	\begin{center}
         \large\bfseries
         \linespacing{1.6}
-        \MakeTextUppercase\@chapapp\space \ifthenelse{\equal{\@appname}{}}{\@Roman}{}\thechapter \\
+        \MakeTextUppercase\@chapapp\space \thechapter \\
 	      \MakeTextUppercase{#1}\par\nobreak
 	\end{center}
 	\vskip 1.3cm
@@ -691,7 +720,7 @@
 	{\normalfont\normalsize\bfseries}%
 }
 \renewcommand\subsubsection{%
-    \@startsection{subsubsection}{3}{4cm}%
+    \@startsection{subsubsection}{3}{\parindent}%
     {-1.3ex\@plus -.1ex \@minus -.1ex}%
 	{0.1ex \@plus .1ex}%
     {\normalfont\normalsize}%
@@ -767,7 +796,7 @@
 	\@restonecolfalse
 	\fi
  	\chapter*{\contentsname}
-	\renewcommand{\@althead}{\hspace{0.35\textwidth}CONTENTS~(cont.)\hfil}
+	\renewcommand{\@althead}{\hspace{0.25\textwidth}TABLE OF CONTENTS~(cont.)\hfil}
 	\pagestyle{continued}
        	\thispagestyle{myheadings}
        	\markright{\footnotesize\hfil\thepage}
@@ -812,6 +841,16 @@
 	\addcontentsline{toc}{chapter}{\listtablename}
 	\@starttoc{lot}%
 	\if@restonecol\twocolumn\fi
+\fi
+}
+
+\newcommand{\listofabbreviations}[1]{
+\if@draftmode\else
+	\chapter*{LIST OF ABBREVIATIONS}
+	\thispagestyle{myheadings}
+	\markright{\footnotesize\hfil\thepage}
+	\addcontentsline{toc}{chapter}{LIST OF ABBREVIATIONS}
+	#1
 \fi
 }
 
@@ -937,11 +976,24 @@
 		\>\@homeaddress \\ \>\@homeaddressLnII \\
 	\ifthenelse{\equal{\@homeaddressLnIII}{}}{}%
 	{\>\@homeaddressLnIII \\ }}%
+	{\bf RESEARCH GRANTS}%
+	\>\ifthenelse{\equal{\@researchgrants}{}}{-}{\@researchgrants} \\
+	\ifthenelse{\equal{\@researchgrantsLnII}{}}{}%
+	{\>\>\@researchgrantsLnII \\ }%
+	\ifthenelse{\equal{\@researchgrantsLnIII}{}}{}%
+	{\>\>\@researchgrantsLnIII \\ }%
 	\ifthenelse{\equal{\@email}{}}{}{{\bf E-MAIL} \>\@email \\ }%
+	{\bf PUBLICATION/PRESENTATION}%
+	\>\ifthenelse{\equal{\@publications}{}}{-}{\@publications} \\
+	\ifthenelse{\equal{\@publicationsLnII}{}}{}%
+	{\>\@publicationsLnII \\ }%
+	\ifthenelse{\equal{\@publicationsLnIII}{}}{}%
+	{\>\@publicationsLnIII \\ }%
 	\end{tabbing}
 \fi
 }
 
+\setcounter{tocdepth}{0}
 \pagestyle{headings}
 \AtBeginDocument{\pagenumbering{roman}}
 
@@ -954,7 +1006,7 @@
 %
 % Add field names after titles of TOC,LOF,LOT
 %
-\addtocontents{toc}{ \protect \contentsline{chapter}{}{\textbf{Page}}{}}
+\addtocontents{toc}{ \protect \contentsline{chapter}{\hfill}{\textbf{Page}}{}}
 \addtocontents{lot}{ \protect \contentsline{chapter}{Table}{\textbf{Page}}{}}
 \addtocontents{lof}{ \protect \contentsline{chapter}{Figure}{\textbf{Page}}{}}
 \renewcommand*\l@figure{\@dottedtocline{1}{0em}{2.3em}}  % define indent = 0
