@@ -36,17 +36,21 @@
 \linespacing{1.2}
 Write the abstract here. Keep within two pages.
 }
-{
-\linespacing{1.2}
-Write the implication of the thematic paper here.
-}
 
 \tableofcontents
 \listoftables
 \listoffigures
+%\listofabbreviations{
+%\begin{tabbing}
+%\hspace{3cm}\=\kill
+%DNA \> Deoxyribonucleic Acid \\
+%RNA \> Ribonucleic Acid \\
+%\end{tabbing}
+%}
 
-% The chapter structure below is a suggestion. Adjust as appropriate
-% to the discipline and nature of the research, per advisor discretion.
+% The chapter structure below follows the default 6-chapter format.
+% Per PR07284, the thematic paper may use a flexible chapter structure
+% at the discretion of the advisory committee.
 
 \chapter{Introduction}
 Describe background, significance, objectives, and scope \cite{mount2004bioinformatics}.
@@ -57,8 +61,39 @@ Review relevant concepts, theories, and related studies.
 \chapter{Research Methodology}
 Describe research procedures and methods.
 
-\chapter{Results and Discussion}
-Present and discuss findings.
+\chapter{Results}
+Present findings.
+
+\section{Heading}
+Section text here.
+
+\subsection{Subheading}
+Subsection text here.
+
+\subsubsection{Sub-subheading}
+Subsubsection text here.
+
+\begin{table}[h]
+\centering
+\caption{Summary of results}
+\begin{tabular}{cl}
+\hline
+No. & Finding \\
+\hline
+1 & First finding \\
+2 & Second finding \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\rule{6cm}{4cm}
+\caption{Conceptual framework}
+\end{figure}
+
+\chapter{Discussion}
+Discuss findings in relation to the literature.
 
 \chapter{Conclusion and Recommendations}
 Summarize key findings, limitations, and future work.
